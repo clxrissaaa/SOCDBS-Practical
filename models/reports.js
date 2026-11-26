@@ -1,7 +1,13 @@
 const { query } = require('../database');
 
+
 module.exports.generateModulesPerformance = function generateModulesPerformance() {
-    const sql = 'SELECT * FROM get_modules_performance()';
+    const sql = `SELECT * FROM get_modules_performance() AS result(
+        mod_registered VARCHAR(10),
+        grade CHAR(2),
+        grade_count BIGINT
+    )`;
+
     return query(sql)
         .then(function (result) {
             const rows = result.rows;
@@ -35,3 +41,4 @@ module.exports.generateAttendance = function generateAttendance() {
             throw error;
         });
 };
+
